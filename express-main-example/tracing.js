@@ -8,7 +8,7 @@ const opentelemetry = require("@opentelemetry/sdk-node");
 const { NodeTracerProvider } = require('@opentelemetry/sdk-trace-node');
 
 // Add the MySQLInstrumentation import
-const { MySQL2Instrumentation } = require('@opentelemetry/instrumentation-mysql2');
+ const { MySQL2Instrumentation } = require('@opentelemetry/instrumentation-mysql2');
 // Import the necessary instrumentation
 // This will be done in the next steps
 
@@ -16,7 +16,7 @@ const { MySQL2Instrumentation } = require('@opentelemetry/instrumentation-mysql2
 const sdk = new opentelemetry.NodeSDK({
   // Configure the desired instrumentations here, as described in the next steps
   instrumentations: [
-        MySQL2Instrumentation
+    MySQL2Instrumentation
   ]
 });
 
