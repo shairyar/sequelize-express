@@ -1,4 +1,6 @@
+const { appsignal } = require("../appsignal");
 const express = require('express');
+const { expressMiddleware, expressErrorHandler } = require("@appsignal/express");
 const bodyParser = require('body-parser');
 
 const routes = {
@@ -24,6 +26,9 @@ function makeHandlerAwareOfAsyncErrors(handler) {
 		}
 	};
 }
+
+// ADD THIS AFTER ANY OTHER EXPRESS MIDDLEWARE, BUT BEFORE ANY ROUTES!
+app.use(expressMiddleware(appsignal));
 
 // We provide a root route just as an example
 app.get('/', (req, res) => {
@@ -68,5 +73,6 @@ for (const [routeName, routeController] of Object.entries(routes)) {
 		);
 	}
 }
-
+// ADD THIS AFTER ANY OTHER EXPRESS MIDDLEWARE, AND AFTER ANY ROUTES!
+app.use(expressErrorHandler(appsignal));
 module.exports = app;
